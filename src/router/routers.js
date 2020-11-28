@@ -5,6 +5,9 @@ import AppList from '../com/app/AppList';
 import UserList from '../com/user/UserList';
 import MyInfo from '../com/MyInfo';
 import HomeIndex from '../com/HomeIndex';
+import AppDetail from '../com/app/AppDetail';
+import AppVersionList from '../com/app/AppVersionList';
+import VersionDetail from '../com/app/VersionDetail';
 
 export const rootRoutes = [
     {
@@ -44,6 +47,21 @@ export const homeRoutes = [
     {
         path: '/c/my',
         component: MyInfo,
+        exact: true,
+    },
+    {
+        path: '/c/app/:id',
+        component: AppDetail,
+        exact: true,
+    },
+    {
+        path: '/c/:appId/version',
+        component: AppVersionList,
+        exact: true,
+    },
+    {
+        path: '/c/version/:id',
+        component: VersionDetail,
         exact: true,
     }
 ];
