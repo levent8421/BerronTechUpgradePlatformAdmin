@@ -41,7 +41,7 @@ class VersionDetail extends Component {
             'X-Token': webToken,
         };
         if (filename) {
-            return (<a href={filename} target="_blank">点击下载</a>);
+            return (<a href={filename} target="_blank" rel="noreferrer">点击下载</a>);
         }
         return (<Upload
             showUploadList={false}
