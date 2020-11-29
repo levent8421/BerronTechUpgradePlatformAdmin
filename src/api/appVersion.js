@@ -27,3 +27,8 @@ export const fetchVersionById = id => {
         method: 'get',
     });
 };
+
+
+export const getFileUploadUrl = id => {
+    return `/api/token/app-version/${id}/_file`;
+};
