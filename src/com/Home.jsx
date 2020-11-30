@@ -63,7 +63,7 @@ class Home extends Component {
                     <div className="banner">BerronTech</div>
                     <div className="user-info">
                         <Avatar className="avatar" src={userAvatar}/>
-                        <div className="username">{me.name}</div>
+                        <div className="username">{me ? me.name : ''}</div>
                     </div>
                 </Header>
                 <Layout>

@@ -26,6 +26,7 @@ class UserList extends Component {
     componentDidMount() {
         const {currentPage} = this.state;
         this.refreshUsers(currentPage);
+        this.props.storeOperations.setTitle('用户管理', 'user list');
     }
 
     refreshUsers(page, rows = TABLE_ROWS) {
