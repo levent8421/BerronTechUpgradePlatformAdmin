@@ -14,3 +14,45 @@ export const loginByName = data => {
         data,
     });
 };
+
+export const searchByName = (name, maxRows) => {
+    return request({
+        url: '/api/token/user/_search',
+        method: 'get',
+        params: {
+            name: name,
+            maxRows: maxRows,
+        }
+    });
+};
+
+
+export const fetchUsers = (page, rows) => {
+    return request({
+        url: '/api/token/user/',
+        method: 'get',
+        params: {
+            page, rows
+        }
+    });
+};
+
+
+export const createUser = data => {
+    return request({
+        url: '/api/token/user/',
+        method: 'put',
+        data: data,
+    });
+};
+
+
+export const resetPassword = (id, password) => {
+    return request({
+        url: `/api/token/user/${id}/_reset-password`,
+        method: 'post',
+        data: {
+            password,
+        }
+    });
+};

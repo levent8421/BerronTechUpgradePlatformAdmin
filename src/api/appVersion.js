@@ -28,7 +28,14 @@ export const fetchVersionById = id => {
     });
 };
 
-
 export const getFileUploadUrl = id => {
     return `/api/token/app-version/${id}/_file`;
+};
+
+export const updateVersionInfo = data => {
+    return request({
+        url: `/api/token/app-version/${data.id}`,
+        method: 'post',
+        data: data,
+    });
 };

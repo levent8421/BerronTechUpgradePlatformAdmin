@@ -75,11 +75,17 @@ class AppList extends Component {
         this.props.history.push({pathname: `/c/${app.id}/version`});
     }
 
+    toAppUsers(app) {
+        const {id} = app;
+        this.props.history.push({pathname: `/c/${id}/users`});
+    }
+
     renderTableOperations(app) {
         return (<>
             <Button type="link" onClick={() => this.deleteApp(app)}>删除</Button>
             <Button type="link" onClick={() => this.toAppDetails(app)}>编辑</Button>
             <Button type="link" onClick={() => this.toVersionList(app)}>版本</Button>
+            <Button type="link" onClick={() => this.toAppUsers(app)}>用户</Button>
         </>);
     }
 

@@ -6,6 +6,7 @@ import {AppstoreOutlined, UserOutlined} from '@ant-design/icons';
 import {renderRoutes} from 'react-router-config';
 import {homeRoutes} from '../router/routers';
 import {withRouter} from 'react-router-dom';
+import {fetchCurrentUser} from '../api/user';
 
 const {Header, Sider, Footer, Content} = Layout;
 
@@ -19,11 +20,18 @@ class Home extends Component {
     }
 
     checkWebToken() {
-        const {storeState, history} = this.props;
+        const {storeState, storeOperations, history} = this.props;
         const {webToken, me} = storeState;
-        if (!webToken || !me) {
+        const {setToken} = storeOperations;
+        if (!webToken) {
             history.replace({
                 pathname: '/login',
+            });
+            return;
+        }
+        if (!me) {
+            fetchCurrentUser().then(user => {
+                setToken(webToken, user);
             });
         }
     }
@@ -55,7 +63,7 @@ class Home extends Component {
                     <div className="banner">BerronTech</div>
                     <div className="user-info">
                         <Avatar className="avatar" src={userAvatar}/>
-                        <div className="username">root</div>
+                        <div className="username">{me.name}</div>
                     </div>
                 </Header>
                 <Layout>

@@ -11,15 +11,11 @@ const hideLoading = (hide) => {
 const showError = msg => {
     message.warn(msg);
 };
-const showLoginModal = () => {
-    Modal.confirm({
-        title: '登录失效',
-        content: '您的当前登录已失效，是否重新登录？',
-        okText: '重新登录',
-        cancelText: '取消',
-        onOk: () => {
-
-        },
+const showLoginModal = res => {
+    const {msg} = res.data;
+    Modal.error({
+        title: '权限错误',
+        content: msg,
     });
 };
 

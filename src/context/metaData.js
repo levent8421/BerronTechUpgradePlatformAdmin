@@ -43,3 +43,17 @@ export const VERSION_STATE_OPTIONS = [
         key: 0,
     }
 ];
+
+
+export const USER_APP_ROLE_OPTIONS = [
+    {
+        label: '管理员(Owner)',
+        value: 0,
+        key: 0,
+    },
+    {
+        label: '维护员(Maintainer)',
+        value: 1,
+        key: 1,
+    }
+];

@@ -8,6 +8,7 @@ import HomeIndex from '../com/HomeIndex';
 import AppDetail from '../com/app/AppDetail';
 import AppVersionList from '../com/app/AppVersionList';
 import VersionDetail from '../com/app/VersionDetail';
+import AppUsers from '../com/app/AppUsers';
 
 export const rootRoutes = [
     {
@@ -62,6 +63,11 @@ export const homeRoutes = [
     {
         path: '/c/version/:id',
         component: VersionDetail,
+        exact: true,
+    },
+    {
+        path: '/c/:id/users',
+        component: AppUsers,
         exact: true,
     }
 ];

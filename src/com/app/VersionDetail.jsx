@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {mapStateAndActions} from '../../store/storeUtils';
-import {fetchVersionById, getFileUploadUrl} from '../../api/appVersion';
-import {Button, Form, Input, InputNumber, message, Select, Upload} from 'antd';
+import {fetchVersionById, getFileUploadUrl, updateVersionInfo} from '../../api/appVersion';
+import {Button, Form, Input, InputNumber, message, Modal, Select, Upload} from 'antd';
 import {VERSION_STATE_OPTIONS} from '../../context/metaData';
 import './VersionDetail.less';
 import {UploadOutlined} from '@ant-design/icons';
@@ -15,14 +15,33 @@ class VersionDetail extends Component {
     }
 
     componentDidMount() {
+        const {id} = this.props.match.params;
+        this.versionId = id;
         this.refreshVersionInfo();
     }
 
     refreshVersionInfo() {
-        const {id} = this.props.match.params;
-        fetchVersionById(id).then(res => {
+
+        const {setTitle} = this.props.storeOperations;
+        fetchVersionById(this.versionId).then(res => {
             this.setState({version: res});
             this.form && this.form.setFieldsValue(res);
+            setTitle('版本信息管理', res.versionName);
+        });
+    }
+
+    updateVersionInfo(data) {
+        data.id = this.versionId;
+        Modal.confirm({
+            title: '确认更新版本信息？',
+            content: '确认更新版本信息？',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: () => {
+                updateVersionInfo(data).then(() => {
+                    message.success('信息更新成功');
+                })
+            },
         });
     }
 
@@ -58,12 +77,13 @@ class VersionDetail extends Component {
         const {version} = this.state;
         return (
             <div className="version-detail">
-                <Form ref={form => this.form = form} initialValues={version} labelCol={{span: 2}}>
+                <Form ref={form => this.form = form} initialValues={version} labelCol={{span: 2}}
+                      onFinish={data => this.updateVersionInfo(data)}>
                     <Form.Item label="版本名称" name="versionName" rules={[{required: true, message: '请输入版本名称'}]}>
-                        <Input placeholder="请输入版本名称"/>
+                        <Input placeholder="请输入版本名称" disabled={true}/>
                     </Form.Item>
                     <Form.Item label="版本号" name="versionCode" rules={[{required: true, message: '请输入版本号码'}]}>
-                        <InputNumber placeholder="请输入版本号码"/>
+                        <InputNumber placeholder="请输入版本号码" disabled={true}/>
                     </Form.Item>
                     <Form.Item label="状态" name="state" rules={[{required: true, message: '请输入版本名称'}]}>
                         <Select options={VERSION_STATE_OPTIONS} placeholder="请选择状态"/>
