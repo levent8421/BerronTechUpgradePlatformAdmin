@@ -115,8 +115,7 @@ class UserList extends Component {
                     closable={false}
                     maskClosable={false}
                     onCancel={() => this.showAddUserModal(false)}
-                    onOk={this.addUserForm && this.addUserForm.submit}
-
+                    onOk={() => this.addUserForm && this.addUserForm.submit()}
                     visible={addUserModalVisible}>
                     <Form ref={form => this.addUserForm = form} onFinish={data => this.doCreateUser(data)}>
                         <Form.Item label="登录名" name="loginName" rules={[{required: true, message: '请输入登录名'}]}>

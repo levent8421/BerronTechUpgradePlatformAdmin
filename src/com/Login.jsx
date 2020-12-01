@@ -46,11 +46,11 @@ class Login extends Component {
                 <div className="form-wrapper">
                     <Card title="登录" className="card">
                         <Form labelCol={{span: 4, offset: 1}} onFinish={data => this.loginByName(data)}>
-                            <Form.Item label="用户名" name="loginName">
+                            <Form.Item label="用户名" name="loginName" rules={[{required: true, message: '请输入登录名'}]}>
                                 <Input/>
                             </Form.Item>
-                            <Form.Item label="密码" name="password">
-                                <Input/>
+                            <Form.Item label="密码" name="password" rules={[{required: true, message: '请输入密码'}]}>
+                                <Input.Password/>
                             </Form.Item>
                             <Form.Item>
                                 <Button type="primary" htmlType="submit">登录</Button>
