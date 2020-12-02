@@ -49,8 +49,8 @@ class VersionDetail extends Component {
         const {status} = e.file;
         if (status === 'done') {
             message.success('文件上传成功，该版本将被锁定！');
+            this.refreshVersionInfo();
         }
-        this.refreshVersionInfo();
     }
 
     renderFileUpload(version) {
